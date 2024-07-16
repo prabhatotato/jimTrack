@@ -11,7 +11,7 @@
       <app-user-table (userSelected)="onUserSelected($event)"></app-user-table>
     </div>
     <div class="flex-1 p-4">
-      <app-chart></app-chart>
+      <app-chart [user]="selectedUser"></app-chart>
     </div>
   </div>
 </div>

@@ -57,8 +57,6 @@ export class UserTableComponent implements OnInit {
 
     console.log('on filtering paginated users are:', this.paginatedUsers);
     
-    
-
   }
 
   onPageChange(event: PageEvent): void {

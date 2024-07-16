@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import * as CanvasJS from '@canvasjs/angular-charts';
+// import * as CanvasJS from '@canvasjs/angular-charts';
 import { User, Workout } from '../../services/user.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { User, Workout } from '../../services/user.service';
   templateUrl: './chart.component.html'
 })
 export class ChartComponent implements OnChanges {
-  @Input() selectedUser: User | null = null;
+  @Input() user: User | null = null;
 
   chartOptions: any = {
     animationEnabled: true,
@@ -28,11 +28,14 @@ export class ChartComponent implements OnChanges {
   }
 
   updateChart(): void {
-    if (this.selectedUser) {
-      this.chartOptions.data[0].dataPoints = this.selectedUser.workouts.map((workout: Workout) => ({
+    if (this.user) {
+      this.chartOptions.data[0].dataPoints = this.user.workouts.map((workout: Workout) => ({
         label: workout.type,
         y: workout.minutes
       }));
     }
+
+    console.log(this.chartOptions);
+    
   }
 }

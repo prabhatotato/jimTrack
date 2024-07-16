@@ -9,7 +9,7 @@
     <tbody>
       <tr
         *ngFor="let user of paginatedUsers"
-        class="hover:bg-gray-100 cursor-pointer"
+        class="hover:bg-gray-100 cursor-pointer click:bg-gray-300"
         (click)="selectUser(user)"
       >
         <td class="px-4 py-2 border-b">{{ user.name }}</td>
