@@ -8,7 +8,7 @@
     </thead>
     <tbody>
       <tr
-        *ngFor="let user of users"
+        *ngFor="let user of paginatedUsers"
         class="hover:bg-gray-100 cursor-pointer"
         (click)="selectUser(user)"
       >
@@ -31,8 +31,9 @@
     </tbody>
   </table>
   <mat-paginator
-    [pageSizeOptions]="[5, 10, 20]"
-    showFirstLastButtons
-    (page)="changePage($event)"
+    [length]="users.length" 
+    [pageSizeOptions]="[5]"
+    
+    (page)="onPageChange($event)"
   ></mat-paginator>
 </div>

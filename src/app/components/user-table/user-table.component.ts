@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { User } from '../../services/user.service';
+import { UserService, User } from '../../services/user.service';
+import { PageEvent } from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-user-table',
@@ -8,6 +9,9 @@ import { User } from '../../services/user.service';
 })
 export class UserTableComponent implements OnInit {
   users: User[] = [];
+  paginatedUsers: User[] = [];
+  pageSize: number = 5;
+  pageIndex: number = 0;
   
 
   @Output() userSelected = new EventEmitter<User>();
@@ -35,19 +39,43 @@ export class UserTableComponent implements OnInit {
 
   refreshUsers(): void {
     this.users = this.userService.getUsers();
+    this.updatePaginatedUsers();
     console.log('table refreshed:', this.users);
     
   }
 
   filterUsersByName(searchTerm: string): void {
     this.users = this.userService.filterUsersByName(searchTerm);
+    this.pageIndex = 0;
+    this.updatePaginatedUsers();
   }
 
   filterUsersByWorkoutType(type: string): void {
     this.users = this.userService.filterUsersByWorkoutType(type);
+    this.updatePaginatedUsers();
+    console.log('on filtering all users are:', this.users);
+
+    console.log('on filtering paginated users are:', this.paginatedUsers);
+    
+    
+
   }
 
-  changePage(event: any) {
-    // Logic for handling pagination
+  onPageChange(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+    this.updatePaginatedUsers();
   }
+
+  updatePaginatedUsers(): void {
+    const start = this.pageIndex * this.pageSize;
+    const end = start + this.pageSize;
+    console.log('slicing ', start, 'to', end);
+    
+    this.paginatedUsers = this.users.slice(start, end);
+  }
+
+
+
+
 }
