@@ -1,1 +1,25 @@
-<p>search-filter works!</p>
+<div class="space-y-4">
+    <input
+      type="text"
+      placeholder="Search by username"
+      class="w-full px-3 py-2 border border-gray-300 rounded"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+    />
+  
+    <div class="flex space-x-4">
+      <button
+        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        (click)="onAddNew()"
+      >
+        Add New
+      </button>
+      <button
+        class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+        (click)="onFilter()"
+      >
+        Filter
+      </button>
+    </div>
+  </div>
+  

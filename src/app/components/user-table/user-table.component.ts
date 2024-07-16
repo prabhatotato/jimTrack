@@ -1,32 +1,38 @@
-// user-table.component.ts
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { UserService, User } from '../../services/user.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { UserService } from '../../services/user.service';
+import { User } from '../../services/user.service';
 
 @Component({
   selector: 'app-user-table',
-  templateUrl: './user-table.component.html',
-  styleUrls: ['./user-table.component.css']
+  templateUrl: './user-table.component.html'
 })
 export class UserTableComponent implements OnInit {
-  displayedColumns: string[] = ['name'];
-  dataSource: MatTableDataSource<User>;
+  users: User[] = [];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @Output() userSelected = new EventEmitter<User>();
 
-  constructor(private userService: UserService) {
-    this.dataSource = new MatTableDataSource(this.userService.getUsers());
-    console.log('here is data source:',this.dataSource);
-    
-  }
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
+    this.users = this.userService.getUsers();
   }
 
+  selectUser(user: User) {
+    this.userSelected.emit(user);
+  }
 
-  logUserName(user: User): void {
-    console.log('Clicked user:', user.name);
+  deleteUser(id: number, event: Event) {
+    event.stopPropagation();
+    this.userService.deleteUser(id);
+    this.users = this.userService.getUsers();
+  }
+
+  editUser(user: User, event: Event) {
+    event.stopPropagation();
+    // Logic for editing the user
+  }
+
+  changePage(event: any) {
+    // Logic for handling pagination
   }
 }

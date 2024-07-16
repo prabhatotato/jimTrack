@@ -1,1 +1,58 @@
-<p>add-user-diag works!</p>
+<h2 class="text-lg font-bold mb-4">Add New User</h2>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div class="mb-4">
+    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+    <input
+      id="name"
+      formControlName="name"
+      type="text"
+      class="mt-1 px-3 py-2 border border-gray-300 rounded w-full"
+    />
+    <div *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].touched" class="text-red-500 text-sm mt-1">
+      Name is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="workoutType" class="block text-sm font-medium text-gray-700">Workout Type</label>
+    <input
+      id="workoutType"
+      formControlName="workoutType"
+      type="text"
+      class="mt-1 px-3 py-2 border border-gray-300 rounded w-full"
+    />
+    <div *ngIf="userForm.controls['workoutType'].invalid && userForm.controls['workoutType'].touched" class="text-red-500 text-sm mt-1">
+      Workout type is required.
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="minutes" class="block text-sm font-medium text-gray-700">Minutes</label>
+    <input
+      id="minutes"
+      formControlName="minutes"
+      type="number"
+      class="mt-1 px-3 py-2 border border-gray-300 rounded w-full"
+    />
+    <div *ngIf="userForm.controls['minutes'].invalid && userForm.controls['minutes'].touched" class="text-red-500 text-sm mt-1">
+      Minutes must be a positive number.
+    </div>
+  </div>
+
+  <div class="flex justify-end">
+    <button
+      type="button"
+      class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 mr-2"
+      (click)="onCancel()"
+    >
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      [disabled]="userForm.invalid"
+    >
+      Add User
+    </button>
+  </div>
+</form>
