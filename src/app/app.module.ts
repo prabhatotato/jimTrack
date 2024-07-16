@@ -31,7 +31,7 @@ import { AddUserDialogComponent } from './components/add-user-diag/add-user-diag
     MatTable,
     FormsModule, 
     ReactiveFormsModule,
-    CanvasJSAngularChartsModule
+    CanvasJSAngularChartsModule,
     
   ],
   providers: [

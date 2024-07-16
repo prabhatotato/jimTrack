@@ -24,13 +24,15 @@ export class AddUserDialogComponent implements OnInit {
   onSubmit(): void {
     if (this.userForm.valid) {
       const newUser: User = {
-        id: 0,
+        id: '0',
         name: this.userForm.value.name,
         workouts: [{
           type: this.userForm.value.workoutType,
           minutes: this.userForm.value.minutes
         }]
       };
+      console.log('form submitted. emitting user dialog box:', newUser);
+      
       this.userAdded.emit(newUser);
       this.userForm.reset();
     }

@@ -2,8 +2,13 @@
   <app-header></app-header>
   <div class="flex flex-1">
     <div class="w-1/3 border-r border-gray-300 p-4">
-      <app-search-filter></app-search-filter>
-      <app-user-table></app-user-table>
+      <app-search-filter
+      (userAdded)="onUserAdded($event)" 
+      (search)="onSearch($event)" 
+      (filter)="onFilter($event)">
+
+      </app-search-filter>
+      <app-user-table (userSelected)="onUserSelected($event)"></app-user-table>
     </div>
     <div class="flex-1 p-4">
       <app-chart></app-chart>

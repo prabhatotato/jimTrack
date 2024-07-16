@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export interface Workout {
@@ -7,7 +8,7 @@ export interface Workout {
 }
 
 export interface User {
-  id: number;
+  id: string;
   name: string;
   workouts: Workout[];
 }
@@ -30,7 +31,7 @@ export class UserService {
     } else {
       this.users = [
         {
-          id: 1,
+          id: uuidv4(),
           name: 'John Doe',
           workouts: [
             { type: 'Running', minutes: 30 },
@@ -38,7 +39,7 @@ export class UserService {
           ]
         },
         {
-          id: 2,
+          id: uuidv4(),
           name: 'Jane Smith',
           workouts: [
             { type: 'Swimming', minutes: 60 },
@@ -46,7 +47,7 @@ export class UserService {
           ]
         },
         {
-          id: 3,
+          id: uuidv4(),
           name: 'Mike Johnson',
           workouts: [
             { type: 'Yoga', minutes: 50 },
@@ -65,13 +66,22 @@ export class UserService {
 
   // Get all users
   getUsers(): User[] {
+    console.log('getting users');
+    console.log(this.users);
+
+    
     return this.users;
   }
 
   // Add a new user
   addUser(user: User): void {
-    user.id = this.users.length + 1;
+    
+    
+    user.id = uuidv4();
+    console.log('adding this user', user);
     this.users.push(user);
+    console.log("inside addUser of srvice: ", this.users);
+    
     this.saveUsersToLocalStorage();
   }
 
@@ -87,7 +97,7 @@ export class UserService {
   }
 
   // Delete a user
-  deleteUser(id: number): void {
+  deleteUser(id: string): void {
     this.users = this.users.filter(user => user.id !== id);
     this.saveUsersToLocalStorage();
   }
