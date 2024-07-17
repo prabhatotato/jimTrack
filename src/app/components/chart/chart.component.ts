@@ -1,5 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
-// import * as CanvasJS from '@canvasjs/angular-charts';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { User, Workout } from '../../services/user.service';
 
 @Component({
@@ -8,34 +7,24 @@ import { User, Workout } from '../../services/user.service';
 })
 export class ChartComponent implements OnChanges {
   @Input() user: User | null = null;
+  chartData: any;
 
-  chartOptions: any = {
-    animationEnabled: true,
-    title: {
-      text: "Workout Progress"
-    },
-    axisY: {
-      title: "Minutes"
-    },
-    data: [{
-      type: "column",
-      dataPoints: []
-    }]
-  };
-
-  ngOnChanges(): void {
-    this.updateChart();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['user'] && this.user) {
+      this.updateChartData();
+    }
   }
 
-  updateChart(): void {
-    if (this.user) {
-      this.chartOptions.data[0].dataPoints = this.user.workouts.map((workout: Workout) => ({
-        label: workout.type,
-        y: workout.minutes
-      }));
-    }
-
-    console.log(this.chartOptions);
-    
+  private updateChartData(): void {
+    this.chartData = {
+      labels: this.user!.workouts.map(workout => workout.type),
+      datasets: [
+        {
+          label: 'Workout Minutes',
+          data: this.user!.workouts.map(workout => workout.minutes),
+          backgroundColor: '#42A5F5'
+        }
+      ]
+    };
   }
 }

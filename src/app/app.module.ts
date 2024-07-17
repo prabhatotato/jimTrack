@@ -5,6 +5,8 @@ import { MatTable } from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { ChartModule } from 'primeng/chart';
+
 
 
 import { AppComponent } from './app.component';
@@ -32,6 +34,7 @@ import { AddUserDialogComponent } from './components/add-user-diag/add-user-diag
     FormsModule, 
     ReactiveFormsModule,
     CanvasJSAngularChartsModule,
+    ChartModule
     
   ],
   providers: [
