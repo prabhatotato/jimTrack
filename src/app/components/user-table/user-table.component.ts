@@ -15,6 +15,8 @@ export class UserTableComponent implements OnInit {
   
 
   @Output() userSelected = new EventEmitter<User>();
+  selectedUser: User | null = null;
+
 
   constructor(private userService: UserService) {}
 
@@ -23,7 +25,12 @@ export class UserTableComponent implements OnInit {
   }
 
   selectUser(user: User) {
+    this.selectedUser = user
     this.userSelected.emit(user);
+  }
+
+  isSelected(user: User): boolean {
+    return this.selectedUser === user;
   }
 
   deleteUser(id: string, event: Event) {

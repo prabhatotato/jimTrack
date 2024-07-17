@@ -1,5 +1,5 @@
-<div class="overflow-x-auto">
-  <table class="min-w-full bg-white border border-gray-300">
+<div class="overflow-x-auto pt-5">
+  <table class="min-w-full bg-white border border-gray-300 ">
     <thead>
       <tr>
         <th class="px-4 py-2 border-b">Username</th>
@@ -9,8 +9,10 @@
     <tbody>
       <tr
         *ngFor="let user of paginatedUsers"
-        class="hover:bg-gray-100 cursor-pointer click:bg-gray-300"
+        class="hover:bg-gray-100 cursor-pointer"
+        [ngClass]="{'bg-blue-100': isSelected(user) }"
         (click)="selectUser(user)"
+        
       >
         <td class="px-4 py-2 border-b">{{ user.name }}</td>
         <td class="px-4 py-2 border-b">

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { User, Workout } from '../../services/user.service';
 
 @Component({
@@ -16,9 +16,28 @@ export class AddUserDialogComponent implements OnInit {
   ngOnInit(): void {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
-      workoutType: ['', Validators.required],
-      minutes: ['', [Validators.required, Validators.min(1)]]
+      workouts: this.fb.array([
+        this.fb.group({
+          type: ['', Validators.required],
+          minutes: ['', [Validators.required, Validators.min(1)]]
+        })
+      ])
     });
+  }
+
+  get workouts(): FormArray {
+    return this.userForm.get('workouts') as FormArray;
+  }
+
+  addWorkout(): void {
+    this.workouts.push(this.fb.group({
+      type: ['', Validators.required],
+      minutes: ['', [Validators.required, Validators.min(1)]]
+    }));
+  }
+
+  removeWorkout(index: number): void {
+    this.workouts.removeAt(index);
   }
 
   onSubmit(): void {
@@ -26,13 +45,9 @@ export class AddUserDialogComponent implements OnInit {
       const newUser: User = {
         id: '0',
         name: this.userForm.value.name,
-        workouts: [{
-          type: this.userForm.value.workoutType,
-          minutes: this.userForm.value.minutes
-        }]
+        workouts: this.userForm.value.workouts
       };
       console.log('form submitted. emitting user dialog box:', newUser);
-      
       this.userAdded.emit(newUser);
       this.userForm.reset();
     }
