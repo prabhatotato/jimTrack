@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th class="px-4 py-2 border-b">Username</th>
+        <th class="px-4 py-2 border-b">Workouts</th>
         <th class="px-4 py-2 border-b">Actions</th>
       </tr>
     </thead>
@@ -12,9 +13,15 @@
         class="hover:bg-gray-100 cursor-pointer"
         [ngClass]="{'bg-blue-100': isSelected(user) }"
         (click)="selectUser(user)"
-        
       >
         <td class="px-4 py-2 border-b">{{ user.name }}</td>
+        <td class="px-4 py-2 border-b">
+          <ul>
+            <li *ngFor="let workout of user.workouts">
+              {{ workout.type }}: {{ workout.minutes }} mins
+            </li>
+          </ul>
+        </td>
         <td class="px-4 py-2 border-b">
           <button
             class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
@@ -35,7 +42,6 @@
   <mat-paginator
     [length]="users.length" 
     [pageSizeOptions]="[5]"
-    
     (page)="onPageChange($event)"
   ></mat-paginator>
 </div>
