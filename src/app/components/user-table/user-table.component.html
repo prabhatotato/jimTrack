@@ -14,7 +14,7 @@
         [ngClass]="{'bg-blue-100': isSelected(user) }"
         (click)="selectUser(user)"
       >
-        <td class="px-4 py-2 border-b">{{ user.name }}</td>
+        <td class="px-4 py-2 border-b text-center">{{ user.name }}</td>
         <td class="px-4 py-2 border-b">
           <ul>
             <li *ngFor="let workout of user.workouts">
@@ -22,7 +22,7 @@
             </li>
           </ul>
         </td>
-        <td class="px-4 py-2 border-b">
+        <td class="px-4 py-2 border-b text-center">
           <button
             class="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
             (click)="deleteUser(user.id, $event)"
