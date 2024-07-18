@@ -1,6 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserService, User } from '../../services/user.service';
 import { PageEvent } from '@angular/material/paginator';
+import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 
 @Component({
@@ -15,10 +18,15 @@ export class UserTableComponent implements OnInit {
   
 
   @Output() userSelected = new EventEmitter<User>();
+  @Output() userEdited = new EventEmitter<User>();
   selectedUser: User | null = null;
 
+  
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.refreshUsers();
@@ -39,15 +47,34 @@ export class UserTableComponent implements OnInit {
     this.refreshUsers();
   }
 
-  editUser(user: User, event: Event) {
+  editUser(user: User, event: Event): void {
     event.stopPropagation();
-    // Logic for editing the user
+    const dialogRef = this.dialog.open(EditUserDialogComponent, {
+      width: '400px',
+      data: user
+    });
+
+    dialogRef.afterClosed().subscribe((result: User | undefined) => {
+      if (result) {
+        console.log('from user-table emitting', result);
+        
+        this.userEdited.emit(result);
+      }
+    });
   }
 
   refreshUsers(): void {
     this.users = this.userService.getUsers();
     this.updatePaginatedUsers();
     console.log('table refreshed:', this.users);
+    if (this.selectedUser) {
+      const user = this.users.find(user => user.id === this.selectedUser!.id) || undefined;
+      this.isSelected(user!)
+      this.userSelected.emit(user);
+    }
+
+    
+    
     
   }
 

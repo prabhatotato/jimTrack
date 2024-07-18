@@ -36,4 +36,9 @@ export class AppComponent {
   onFilter(filterTerm: string): void {
     this.userTable.filterUsersByWorkoutType(filterTerm);
   }
+
+  onUserEdited(updatedUser: User): void {
+    this.userService.updateUser(updatedUser);
+    this.userTable.refreshUsers();
+  }
 }

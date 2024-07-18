@@ -11,7 +11,7 @@
       <tr
         *ngFor="let user of paginatedUsers"
         class="hover:bg-gray-100 cursor-pointer"
-        [ngClass]="{'bg-blue-100': isSelected(user) }"
+        [ngClass]="{'bg-blue-100': isSelected(user)  }"
         (click)="selectUser(user)"
       >
         <td class="px-4 py-2 border-b text-center">{{ user.name }}</td>

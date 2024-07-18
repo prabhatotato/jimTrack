@@ -87,6 +87,8 @@ export class UserService {
 
    // Update a user
    updateUser(updatedUser: User): void {
+    console.log('in service updating user:',  updatedUser);
+    
     const index = this.users.findIndex(user => user.id === updatedUser.id);
     if (index !== -1) {
       this.users[index] = updatedUser;

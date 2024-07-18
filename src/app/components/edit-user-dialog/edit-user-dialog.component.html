@@ -1,0 +1,82 @@
+<div class="p-5  max-h-96 overflow-y-auto min-w-96">
+    <h2 class="text-lg font-bold mb-4">Add New User</h2>
+    <form [formGroup]="userForm" (ngSubmit)="onSave()">
+      <div class="mb-4">
+        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+        <input
+          id="name"
+          formControlName="name"
+          type="text"
+          class="mt-1 px-3 py-2 border border-gray-300 rounded w-full"
+        />
+        <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched" class="text-red-500 text-sm mt-1">
+          Name is required.
+        </div>
+      </div>
+  
+      <div formArrayName="workouts">
+        <div *ngFor="let workout of workouts.controls; let i=index" [formGroupName]="i" class="mb-4">
+          <label for="workoutType" class="block text-sm font-medium text-gray-700">Workout Type</label>
+          <select
+            id="workoutType"
+            formControlName="type"
+            class="mt-1 px-3 py-2 border border-gray-300 rounded w-full"
+          >
+            <option value="" disabled>Select</option>
+            <option value="Running">Running</option>
+            <option value="Cycling">Cycling</option>
+            <option value="Swimming">Swimming</option>
+            <option value="Yoga">Yoga</option>
+          </select>
+          <div *ngIf="workout.get('type')!.invalid && workout.get('type')!.touched" class="text-red-500 text-sm mt-1">
+            Workout type is required.
+          </div>
+  
+          <label for="minutes" class="block text-sm font-medium text-gray-700">Minutes</label>
+          <input
+            id="minutes"
+            formControlName="minutes"
+            type="number"
+            class="mt-1 px-3 py-2 border border-gray-300 rounded w-full"
+          />
+          <div *ngIf="workout.get('minutes')!.invalid && workout.get('minutes')!.touched" class="text-red-500 text-sm mt-1">
+            Minutes must be a positive number.
+          </div>
+  
+          <button
+            type="button"
+            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 mt-2"
+            (click)="removeWorkout(i)"
+          >
+            Remove Workout
+          </button>
+        </div>
+      </div>
+  
+      <button
+        type="button"
+        class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 mb-4"
+        (click)="addWorkout()"
+      >
+        Add Workout
+      </button>
+  
+      <div class="flex justify-end">
+        <button
+          type="button"
+          class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 mr-2"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          [disabled]="userForm.invalid"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+  

@@ -8,7 +8,11 @@
       (filter)="onFilter($event)">
 
       </app-search-filter>
-      <app-user-table (userSelected)="onUserSelected($event)"></app-user-table>
+      <app-user-table 
+        (userSelected)="onUserSelected($event)"
+        (userEdited)="onUserEdited($event)"
+      >
+      </app-user-table>
     </div>
     <div class="flex-1 p-4">
       <app-chart [user]="selectedUser"></app-chart>

@@ -8,7 +8,6 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ChartModule } from 'primeng/chart';
 
 
-
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HeaderComponent } from './components/header/header.component';
@@ -16,6 +15,7 @@ import { SearchFilterComponent } from './components/search-filter/search-filter.
 import { UserTableComponent } from './components/user-table/user-table.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { AddUserDialogComponent } from './components/add-user-diag/add-user-diag.component';
+import { EditUserDialogComponent } from './components/edit-user-dialog/edit-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { AddUserDialogComponent } from './components/add-user-diag/add-user-diag
     SearchFilterComponent,
     UserTableComponent,
     ChartComponent,
-    AddUserDialogComponent
+    AddUserDialogComponent,
+    EditUserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,8 @@ import { AddUserDialogComponent } from './components/add-user-diag/add-user-diag
     FormsModule, 
     ReactiveFormsModule,
     CanvasJSAngularChartsModule,
-    ChartModule
+    ChartModule,
+
     
   ],
   providers: [
