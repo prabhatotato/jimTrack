@@ -1,27 +1,75 @@
-# WorkoutChallengeTracker
+# Workout Challenge Tracker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+## Overview
 
-## Development server
+Workout Challenge Tracker is a Single Page Application (SPA) built with Angular to manage users and their workouts. The application allows adding, editing, and deleting users along with their workout details, and visualizes the workout data using charts.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- Add new users with workout details
+- Edit existing users and their workout details
+- Delete users
+- Filter users by name and workout type
+- View workout details in a tabular format
+- Visualize workout data using charts
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technology Stack
 
-## Build
+- Angular
+- Tailwind CSS
+- PrimeNG for charts
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Getting Started
 
-## Running unit tests
+### Prerequisites
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Node.js and npm installed on your machine
 
-## Running end-to-end tests
+### Installation
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Clone the repository and navigate into it.
+2. Install the project dependencies.
 
-## Further help
+### Running the Application
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Start the development server.
+2. Open your browser and navigate to `http://localhost:4200/`.
+
+### Running Tests
+
+To run the tests and generate a code coverage report:
+
+1. Execute the test command with code coverage flag.
+2. The tests will run, and a code coverage report will be generated in the `coverage/` directory.
+
+### Viewing the Code Coverage Report
+
+1. Navigate to the `coverage/` directory after running the tests.
+2. Open the `index.html` file in a web browser to view the coverage report.
+
+## Unit Tests
+
+The assignment includes unit tests for one service (`UserService`) and one component (`HeaderComponent`) with 100% code coverage.
+
+### UserService Tests
+
+- Test for service creation.
+- Test for adding a new user.
+- Test for updating an existing user.
+- Test for deleting a user.
+- Test for filtering users by name.
+- Test for filtering users by workout type.
+
+### HeaderComponent Tests
+
+- Test for component creation.
+- Test for header title rendering.
+
+## Code Coverage
+
+![code coverage an test report](image.png)
+
+
+## Conclusion
+
+This project provides a comprehensive solution for tracking workouts, managing user data, and visualizing workout information in a user-friendly manner. With unit tests ensuring robust functionality, the Workout Challenge Tracker is a reliable tool for fitness enthusiasts and trainers alike.
