@@ -4,7 +4,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTable } from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ChartModule } from 'primeng/chart';
 
 
@@ -34,10 +33,7 @@ import { EditUserDialogComponent } from './components/edit-user-dialog/edit-user
     MatTable,
     FormsModule, 
     ReactiveFormsModule,
-    CanvasJSAngularChartsModule,
     ChartModule,
-
-    
   ],
   providers: [
     provideAnimationsAsync()
